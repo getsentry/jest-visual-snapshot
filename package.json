@@ -9,7 +9,7 @@
     "dev": "lerna run dev --parallel",
     "format": "prettier --write \"packages/**/*.{js,json,md}\" \"*.{js,json,md}\"",
     "lint": "eslint .",
-    "release": "lerna publish",
+    "release": "yarn build && lerna publish",
     "test": "lerna run test"
   },
   "devDependencies": {

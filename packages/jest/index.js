@@ -1,5 +1,5 @@
 /* global expect */
-const { toSnapshot } = require("./toSnapshot");
+const toSnapshot = require("./toSnapshot");
 
 expect.extend({
   toSnapshot,

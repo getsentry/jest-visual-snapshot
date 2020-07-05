@@ -33,9 +33,9 @@
     "fsevents": ">=2.1.2"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
+    "*.(t|j)s": [
+      "prettier --write",
+      "eslint --fix"
     ]
   },
   "husky": {

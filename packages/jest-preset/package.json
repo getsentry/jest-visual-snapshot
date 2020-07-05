@@ -12,8 +12,5 @@
   "dependencies": {
     "@visual-snapshot/jest-environment": "^1.0.0",
     "typescript": "^3.9.6"
-  },
-  "peerDependencies": {
-    "puppeteer": "^5.x.x"
   }
 }

@@ -1,8 +1,11 @@
 # visual snapshot
 
-##
+WIP
+
+## Development
 ```
-yarn
+yarn install && yarn lerna bootstrap
+
 yarn dev
 ```
 

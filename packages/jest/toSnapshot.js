@@ -1,5 +1,3 @@
-/* global expect */
-
 export async function toSnapshot(received, args) {
   if (typeof received.html !== "function") {
     return {

@@ -1,4 +1,4 @@
-export async function toSnapshot(received, args) {
+function toSnapshot(received, args) {
   if (typeof received.html !== "function") {
     return {
       message: () =>
@@ -13,3 +13,5 @@ export async function toSnapshot(received, args) {
     args,
   });
 }
+
+module.exports = toSnapshot;

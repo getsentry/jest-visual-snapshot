@@ -1,0 +1,8 @@
+node_modules
+packages/*/lib/*
+dist
+.env
+serviceAccount.json
+.next
+.artifacts
+yarn-error.log

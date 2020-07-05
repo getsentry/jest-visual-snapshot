@@ -1,0 +1,19 @@
+{
+  "name": "@visual-snapshot/jest-preset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"\""
+  },
+  "author": "",
+  "license": "ISC",
+  "gitHead": "28ade6650f5cbc8e8dfe5b2b2342dd33ea67167a",
+  "dependencies": {
+    "@visual-snapshot/jest-environment": "^1.0.0",
+    "typescript": "^3.9.6"
+  },
+  "peerDependencies": {
+    "puppeteer": "^5.x.x"
+  }
+}

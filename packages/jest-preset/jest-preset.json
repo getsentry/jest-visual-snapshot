@@ -1,0 +1,5 @@
+{
+  "globalSetup": "@visual-snapshot/jest-environment/setup",
+  "globalTeardown": "@visual-snapshot/jest-environment/teardown",
+  "testEnvironment": "@visual-snapshot/jest-environment"
+}

@@ -1,3 +1,4 @@
+import { promises as fs } from "fs";
 import path from "path";
 
 import { getBrowser } from "./browser";
@@ -20,7 +21,15 @@ const createSnapshot = async ({
 }: SnapshotParams) => {
   const browser = await getBrowser();
   const page = await browser.newPage();
-  const imagePath = path.resolve(output, `${fileName}.png`);
+  const outputPath = path.resolve(output);
+
+  try {
+    await fs.mkdir(outputPath, { recursive: true });
+  } catch {
+    // eslint-disable-line
+  }
+
+  const imagePath = path.resolve(outputPath, `${fileName}.png`);
 
   await page.setContent(html);
 

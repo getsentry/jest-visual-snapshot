@@ -82,7 +82,7 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
   }
 
   async teardown() {
-    await Promise.all([super.teardown()]);
+    super.teardown();
   }
 }
 

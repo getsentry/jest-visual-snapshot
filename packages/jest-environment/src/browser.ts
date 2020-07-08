@@ -9,7 +9,7 @@ const DEFAULT_CONFIG_CI = {
   exitOnPageError: true,
 };
 
-let browser: Browser;
+let browser: Browser | null;
 
 export async function getBrowser(config?: VisualSnapshotConfig) {
   if (browser) {
@@ -21,4 +21,11 @@ export async function getBrowser(config?: VisualSnapshotConfig) {
   );
 
   return browser;
+}
+
+export async function killBrowser() {
+  if (browser) {
+    await browser.close();
+  }
+  browser = null;
 }

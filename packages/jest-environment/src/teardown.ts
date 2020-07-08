@@ -1,9 +1,9 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-import { getBrowser } from "./browser";
+import { getBrowser, killBrowser } from "./browser";
 
-const queue: Promise<string | Buffer>[] = [];
+let queue: Promise<string | Buffer>[] = [];
 
 type SnapshotParams = {
   fileName: string;
@@ -34,7 +34,7 @@ const createSnapshot = async ({
   await page.setContent(html);
 
   if (css) {
-    page.addStyleTag({
+    await page.addStyleTag({
       content: css,
     });
   }
@@ -52,12 +52,11 @@ export const addSnapshot = (options: SnapshotParams) => {
 };
 
 export default async function visualSnapshotGlobalTeardown() {
-  const browser = await getBrowser();
   try {
     await Promise.all(queue);
+    await killBrowser();
+    return true;
   } catch (err) {
     console.error(err);
   }
-
-  await browser.close();
 }

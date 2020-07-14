@@ -54,6 +54,17 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
     this.global.addSnapshot = ({ html, testName /*, args */ }: AddSnapshot) => {
       let pass = true;
 
+      if (
+        !process.env.VISUAL_SNAPSHOT_ENABLE &&
+        !process.env.VISUAL_HTML_ENABLE
+      ) {
+        return {
+          message: () =>
+            "Environment variable `VISUAL_SNAPSHOT_ENABLE` not set, skipping snapshot'",
+          pass: true,
+        };
+      }
+
       try {
         const cloned = this.dom.window.document.documentElement.cloneNode(true);
         const body = cloned.getElementsByTagName("body").item(0);
@@ -66,6 +77,8 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
           testName,
           html: cloned.outerHTML,
           fileName: slug,
+          saveImage: !!process.env.VISUAL_SNAPSHOT_ENABLE,
+          saveHtml: !!process.env.VISUAL_HTML_ENABLE,
         });
       } catch (err) {
         console.error(err);

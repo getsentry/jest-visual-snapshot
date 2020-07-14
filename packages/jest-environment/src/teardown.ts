@@ -3,13 +3,15 @@ import path from "path";
 
 import { getBrowser, killBrowser } from "./browser";
 
-let queue: Promise<string | Buffer>[] = [];
+const queue: Promise<any>[] = [];
 
 type SnapshotParams = {
   fileName: string;
   html: string;
   testName: string;
   output: string;
+  saveImage: boolean;
+  saveHtml: boolean;
   css?: string;
 };
 
@@ -18,9 +20,9 @@ const createSnapshot = async ({
   fileName,
   css,
   output,
+  saveImage,
+  saveHtml,
 }: SnapshotParams) => {
-  const browser = await getBrowser();
-  const page = await browser.newPage();
   const outputPath = path.resolve(output);
 
   try {
@@ -29,20 +31,35 @@ const createSnapshot = async ({
     // eslint-disable-line
   }
 
-  const imagePath = path.resolve(outputPath, `${fileName}.png`);
+  const promises: Promise<any>[] = [];
 
-  await page.setContent(html);
+  if (saveImage) {
+    const browser = await getBrowser();
+    const page = await browser.newPage();
+    const imagePath = path.resolve(outputPath, `${fileName}.png`);
 
-  if (css) {
-    await page.addStyleTag({
-      content: css,
-    });
+    await page.setContent(html);
+
+    if (css) {
+      await page.addStyleTag({
+        content: css,
+      });
+    }
+    promises.push(
+      page.screenshot({
+        path: imagePath,
+        fullPage: true,
+      })
+    );
   }
 
-  return await page.screenshot({
-    path: imagePath,
-    fullPage: true,
-  });
+  if (saveHtml) {
+    const filePath = path.resolve(outputPath, `${fileName}.html`);
+
+    promises.push(fs.writeFile(filePath, html));
+  }
+
+  return await Promise.all(promises);
 };
 
 export const addSnapshot = (options: SnapshotParams) => {

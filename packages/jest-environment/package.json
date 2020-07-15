@@ -10,7 +10,9 @@
     "prepublishOnly": "yarn build",
     "test": "echo ''"
   },
-  "author": "",
+  "repository": "git://github.com/getsentry/jest-visual-snapshot.git",
+  "homepage": "https://github.com/getsentry/jest-visual-snapshot/tree/main/packages/jest-environment",
+  "author": "Sentry",
   "license": "MIT",
   "dependencies": {
     "@jest/environment": "^26.1.0",

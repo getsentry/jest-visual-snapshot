@@ -39,19 +39,27 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
       ...defaultConfiguration,
       ...config.testEnvironmentOptions,
     };
-    this.getCss();
   }
 
   async getCss() {
-    if (this.environmentConfig.includeCss) {
-      this.css = (
-        await fs.readFile(this.environmentConfig.includeCss, "utf8")
-      ).replace(/[\r\n]+/g, "");
+    if (!this.environmentConfig.includeCss) {
+      return Promise.resolve("");
     }
+
+    if (this.css) {
+      return Promise.resolve(this.css);
+    }
+
+    const css = await fs.readFile(this.environmentConfig.includeCss, "utf8");
+    this.css = css.replace(/[\r\n]+/g, "");
+    return this.css;
   }
 
   async setup() {
-    this.global.addSnapshot = ({ html, testName /*, args */ }: AddSnapshot) => {
+    this.global.addSnapshot = async ({
+      html,
+      testName /*, args */,
+    }: AddSnapshot) => {
       let pass = true;
 
       if (
@@ -70,10 +78,11 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
         const body = cloned.getElementsByTagName("body").item(0);
         body.innerHTML = html;
         const slug = slugify(testName);
+        const css = await this.getCss();
 
         addSnapshot({
           output: this.environmentConfig.output,
-          css: this.css,
+          css,
           testName,
           html: cloned.outerHTML,
           fileName: slug,

@@ -45,10 +45,12 @@ const createSnapshot = async ({
         content: css,
       });
     }
+
+    const el = await page.$("body");
+
     promises.push(
-      page.screenshot({
+      (el || page).screenshot({
         path: imagePath,
-        fullPage: true,
       })
     );
   }

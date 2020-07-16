@@ -32,8 +32,6 @@ const createSnapshot = async ({
     // eslint-disable-line
   }
 
-  const promises: Promise<any>[] = [];
-
   if (saveImage) {
     const browser = await getBrowser();
     const page = await browser.newPage();
@@ -53,29 +51,25 @@ const createSnapshot = async ({
 
     const el = await page.$("#__vs_canvas");
     try {
-      const screenshotPromise = (el ? el : page).screenshot({
+      await (el ? el : page).screenshot({
         path: imagePath,
       });
-      promises.push(screenshotPromise);
     } catch (err) {
       console.error(new Error(`${testName}: ${err}`));
       console.warn("...snapshotting full page instead");
-      const promise = page
-        .screenshot({
-          path: imagePath,
-        })
-        .then(() => page.close());
-      promises.push(promise);
+      await page.screenshot({
+        path: imagePath,
+      });
     }
+
+    await page.close();
   }
 
   if (saveHtml) {
     const filePath = path.resolve(outputPath, `${fileName}.html`);
 
-    promises.push(fs.writeFile(filePath, html));
+    await fs.writeFile(filePath, html);
   }
-
-  await Promise.all(promises);
 
   return true;
 };

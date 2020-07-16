@@ -18,6 +18,7 @@ type SnapshotParams = {
 const createSnapshot = async ({
   html,
   fileName,
+  testName,
   css,
   output,
   saveImage,
@@ -42,17 +43,30 @@ const createSnapshot = async ({
 
     if (css) {
       await page.addStyleTag({
-        content: css,
+        content: `${css}
+        #__vs_canvas {
+          position: relative;
+        }
+        `,
       });
     }
 
     const el = await page.$("#__vs_canvas");
-
-    promises.push(
-      (el || page).screenshot({
+    try {
+      const screenshotPromise = (el ? el : page).screenshot({
         path: imagePath,
-      })
-    );
+      });
+      promises.push(screenshotPromise);
+    } catch (err) {
+      console.error(new Error(`${testName}: ${err}`));
+      console.warn("...snapshotting full page instead");
+      const promise = page
+        .screenshot({
+          path: imagePath,
+        })
+        .then(() => page.close());
+      promises.push(promise);
+    }
   }
 
   if (saveHtml) {
@@ -61,7 +75,9 @@ const createSnapshot = async ({
     promises.push(fs.writeFile(filePath, html));
   }
 
-  return await Promise.all(promises);
+  await Promise.all(promises);
+
+  return true;
 };
 
 export const addSnapshot = (options: SnapshotParams) => {

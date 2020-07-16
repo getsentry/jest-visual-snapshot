@@ -93,7 +93,6 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
       } catch (err) {
         console.error(err);
         pass = false;
-        throw err;
       }
       return {
         message: () => "expected to save snapshot",

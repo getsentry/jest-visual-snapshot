@@ -46,7 +46,7 @@ const createSnapshot = async ({
       });
     }
 
-    const el = await page.$("body");
+    const el = await page.$("#__vs_canvas");
 
     promises.push(
       (el || page).screenshot({

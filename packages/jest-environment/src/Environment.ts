@@ -76,7 +76,8 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
       try {
         const cloned = this.dom.window.document.documentElement.cloneNode(true);
         const body = cloned.getElementsByTagName("body").item(0);
-        body.innerHTML = html;
+        // Wrap with a div so that we don't screenshot entire viewport
+        body.innerHTML = `<div id="__vs_canvas">${html}</div>`;
         const slug = slugify(testName);
         const css = await this.getCss();
 

@@ -19,6 +19,7 @@
     "@jest/types": "^24.9",
     "@sindresorhus/slugify": "^1.0.0",
     "@types/puppeteer": "^3.0.1",
+    "@types/puppeteer-core": "^2.0.0",
     "jest-environment-jsdom": "^24.9",
     "puppeteer-core": "^5.2.1",
     "typescript": "^3.9.6"

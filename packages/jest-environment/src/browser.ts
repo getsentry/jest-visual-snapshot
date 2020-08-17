@@ -1,4 +1,4 @@
-import puppeteer, { Browser } from "puppeteer-core";
+import puppeteer, { Browser } from "puppeteer";
 
 import type { VisualSnapshotConfig } from "./Environment";
 

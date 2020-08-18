@@ -28,6 +28,7 @@ export async function getBrowser(config?: VisualSnapshotConfig) {
 }
 
 export async function killBrowser() {
+  console.log("killing browser");
   if (browser) {
     await browser.close();
   }

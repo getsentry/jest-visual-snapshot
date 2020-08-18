@@ -55,11 +55,15 @@ const createSnapshot = async ({
         path: imagePath,
       });
     } catch (err) {
-      console.error(new Error(`${testName}: ${err}`));
-      console.warn("...snapshotting full page instead");
-      await page.screenshot({
-        path: imagePath,
-      });
+      if (err.message === "Node has 0 height.") {
+        console.error(new Error(`${testName}: ${err}`));
+        console.warn("...snapshotting full page instead");
+        return await page.screenshot({
+          path: imagePath,
+        });
+      }
+
+      throw err;
     }
 
     await page.close();
@@ -83,6 +87,7 @@ export const addSnapshot = (options: SnapshotParams) => {
 export default async function visualSnapshotGlobalTeardown() {
   try {
     await Promise.all(queue);
+    console.log("going to killing browser");
     await killBrowser();
     return true;
   } catch (err) {

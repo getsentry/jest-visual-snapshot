@@ -19,8 +19,8 @@ const DEFAULT_CONFIG_CI = {
 
 async function run(): Promise<void> {
   try {
-    const basePath = core.getInput("basePath");
-    const cssPath = core.getInput("cssPath");
+    const basePath = core.getInput("base-path");
+    const cssPath = core.getInput("css-path");
 
     const globber = await glob.create(`${basePath}/**/*.html`);
     const files = await globber.glob();

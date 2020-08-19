@@ -2,9 +2,9 @@ name: 'jest-visual-snapshop'
 description: 'Renders images from HTML'
 author: 'Sentry'
 inputs:
-  basePath:              # change this
+  base-path:
     description: 'base path to snapshots'
-  cssPath:
+  css-path:
     description: 'path to custom css to inject'
 runs:
   using: 'node12'

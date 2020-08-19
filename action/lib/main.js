@@ -93,8 +93,8 @@ const DEFAULT_CONFIG_CI = {
 function run() {
   return __awaiter(this, void 0, void 0, function*() {
     try {
-      const basePath = core.getInput("basePath");
-      const cssPath = core.getInput("cssPath");
+      const basePath = core.getInput("base-path");
+      const cssPath = core.getInput("css-path");
       const globber = yield glob.create(`${basePath}/**/*.html`);
       const files = yield globber.glob();
       const browser = yield puppeteer_1.default.launch(

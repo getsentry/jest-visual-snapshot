@@ -56,10 +56,12 @@ const createSnapshot = async ({
       });
     } catch (err) {
       console.error(new Error(`${testName}: ${err}`));
-      console.warn("...snapshotting full page instead");
-      await page.screenshot({
-        path: imagePath,
-      });
+      if (err.message === "Node has 0 height.") {
+        console.warn("...snapshotting full page instead");
+        return await page.screenshot({
+          path: imagePath,
+        });
+      }
     }
 
     await page.close();

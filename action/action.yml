@@ -1,10 +1,11 @@
-name: 'Your name here'
-description: 'Provide a description here'
+name: 'jest-visual-snapshop'
+description: 'Renders images from HTML'
 author: 'Sentry'
 inputs:
-  myInput:              # change this
-    description: 'input description here'
-    default: 'default value if applicable'
+  basePath:              # change this
+    description: 'base path to snapshots'
+  cssPath:
+    description: 'path to custom css to inject'
 runs:
   using: 'node12'
   main: 'dist/index.js'

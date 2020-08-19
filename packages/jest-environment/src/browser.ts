@@ -4,7 +4,11 @@ import type { VisualSnapshotConfig } from "./Environment";
 
 const DEFAULT_CONFIG_CI = {
   launch: {
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
   },
   exitOnPageError: true,
 };

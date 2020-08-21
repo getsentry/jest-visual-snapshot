@@ -1,5 +1,1 @@
-import { getBrowser } from "./browser";
-
-export default async function visualSnapshotGlobalSetup() {
-  getBrowser();
-}
+export default async function visualSnapshotGlobalSetup() {}

@@ -1,8 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-import { getBrowser, killBrowser } from "./browser";
-
 const queue: Promise<any>[] = [];
 
 type SnapshotParams = {
@@ -18,10 +16,7 @@ type SnapshotParams = {
 const createSnapshot = async ({
   html,
   fileName,
-  testName,
-  css,
   output,
-  saveImage,
   saveHtml,
 }: SnapshotParams) => {
   const outputPath = path.resolve(output);
@@ -30,41 +25,6 @@ const createSnapshot = async ({
     await fs.mkdir(outputPath, { recursive: true });
   } catch {
     // eslint-disable-line
-  }
-
-  if (saveImage) {
-    const browser = await getBrowser();
-    const page = await browser.newPage();
-    const imagePath = path.resolve(outputPath, `${fileName}.png`);
-
-    await page.setContent(html);
-
-    if (css) {
-      await page.addStyleTag({
-        content: `${css}
-        #__vs_canvas {
-          position: relative;
-        }
-        `,
-      });
-    }
-
-    const el = await page.$("#__vs_canvas");
-    try {
-      await (el ? el : page).screenshot({
-        path: imagePath,
-      });
-    } catch (err) {
-      console.error(new Error(`${testName}: ${err}`));
-      if (err.message === "Node has 0 height.") {
-        console.warn("...snapshotting full page instead");
-        return await page.screenshot({
-          path: imagePath,
-        });
-      }
-    }
-
-    await page.close();
   }
 
   if (saveHtml) {
@@ -83,9 +43,9 @@ export const addSnapshot = (options: SnapshotParams) => {
 };
 
 export default async function visualSnapshotGlobalTeardown() {
+  console.log("visualSnapshotGlobalTeardown");
   try {
     await Promise.all(queue);
-    await killBrowser();
     return true;
   } catch (err) {
     console.error(err);

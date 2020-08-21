@@ -43,7 +43,6 @@ export const addSnapshot = (options: SnapshotParams) => {
 };
 
 export default async function visualSnapshotGlobalTeardown() {
-  console.log("visualSnapshotGlobalTeardown");
   try {
     await Promise.all(queue);
     return true;

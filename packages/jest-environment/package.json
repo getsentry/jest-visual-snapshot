@@ -1,6 +1,6 @@
 {
   "name": "@visual-snapshot/jest-environment",
-  "version": "1.0.15-1",
+  "version": "2.0.0-alpha.0",
   "description": "",
   "main": "index.js",
   "scripts": {

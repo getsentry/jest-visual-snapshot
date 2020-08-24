@@ -3,7 +3,6 @@ import path from "path";
 
 import type { Config } from "@jest/types";
 import type { EnvironmentContext } from "@jest/environment";
-import type { LaunchOptions } from "puppeteer";
 
 import JsDomEnvironment from "jest-environment-jsdom";
 import slugify from "@sindresorhus/slugify";
@@ -16,9 +15,6 @@ const defaultConfiguration = {
 
 export type VisualSnapshotConfig = {
   includeCss?: string;
-  puppeteer?: {
-    launch?: Partial<LaunchOptions>;
-  };
 } & typeof defaultConfiguration;
 
 type AddSnapshot = {

@@ -1,6 +1,6 @@
 {
   "name": "@visual-snapshot/jest",
-  "version": "1.1.0-alpha.0",
+  "version": "2.0.0-alpha.0",
   "description": "",
   "main": "index.js",
   "types": "index.d.ts",
@@ -13,7 +13,7 @@
   "license": "MIT",
   "gitHead": "28ade6650f5cbc8e8dfe5b2b2342dd33ea67167a",
   "dependencies": {
-    "@visual-snapshot/jest-environment": "^1.1.0-alpha.0"
+    "@visual-snapshot/jest-environment": "^2.0.0-alpha.0"
   },
   "devDependencies": {
     "typescript": "^4.2"

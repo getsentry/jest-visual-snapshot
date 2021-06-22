@@ -32,7 +32,7 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
   environmentConfig: VisualSnapshotConfig;
   css?: string;
 
-  constructor(config: Config.ProjectConfig, context: EnvironmentContext = {}) {
+  constructor(config: Config.ProjectConfig, context: EnvironmentContext) {
     super(config, context);
     this.config = config;
     this.environmentConfig = {

@@ -36,6 +36,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "version": "2.0.0-beta.0"
+  }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@visual-snapshot/jest-environment",
-  "version": "3.0.0",
+  "version": "4.0.0-alpha.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -15,11 +15,11 @@
   "author": "Sentry",
   "license": "MIT",
   "dependencies": {
-    "@jest/environment": "^26.6.2",
-    "@jest/types": "^26.6.2",
+    "@jest/environment": "^27.0.3",
+    "@jest/types": "^27.0.2",
     "@sindresorhus/slugify": "^1.0.0",
     "@types/puppeteer": "^3.0.1",
-    "jest-environment-jsdom": "^26.6.2",
+    "jest-environment-jsdom": "^27.0.3",
     "puppeteer": "^5.0.0"
   },
   "gitHead": "28ade6650f5cbc8e8dfe5b2b2342dd33ea67167a",

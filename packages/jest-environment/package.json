@@ -15,12 +15,12 @@
   "author": "Sentry",
   "license": "MIT",
   "dependencies": {
-    "@jest/environment": "^27.0.3",
-    "@jest/types": "^27.0.2",
+    "@jest/environment": "^27.0.6",
+    "@jest/types": "^27.0.6",
     "@sindresorhus/slugify": "^1.0.0",
-    "@types/puppeteer": "^3.0.1",
-    "jest-environment-jsdom": "^27.0.3",
-    "puppeteer": "^5.0.0"
+    "@types/puppeteer": "^5.4.4",
+    "jest-environment-jsdom": "^27.0.6",
+    "puppeteer": "^10.1.0"
   },
   "gitHead": "28ade6650f5cbc8e8dfe5b2b2342dd33ea67167a",
   "devDependencies": {

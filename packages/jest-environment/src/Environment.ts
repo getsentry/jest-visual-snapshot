@@ -94,7 +94,7 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
           saveImage: !!process.env.VISUAL_SNAPSHOT_ENABLE,
           saveHtml: !!process.env.VISUAL_HTML_ENABLE,
         });
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
         pass = false;
       }

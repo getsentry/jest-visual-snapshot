@@ -1,8 +1,10 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-import type { Config } from "@jest/types";
-import type { EnvironmentContext } from "@jest/environment";
+import type {
+  EnvironmentContext,
+  JestEnvironmentConfig,
+} from "@jest/environment";
 import type { LaunchOptions } from "puppeteer";
 
 import JsDomEnvironment from "jest-environment-jsdom";
@@ -28,16 +30,16 @@ type AddSnapshot = {
 };
 
 class VisualSnapshotEnvironment extends JsDomEnvironment {
-  config: Config.ProjectConfig;
+  config: JestEnvironmentConfig;
   environmentConfig: VisualSnapshotConfig;
   css?: string;
 
-  constructor(config: Config.ProjectConfig, context: EnvironmentContext) {
+  constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
     super(config, context);
     this.config = config;
     this.environmentConfig = {
       ...defaultConfiguration,
-      ...config.testEnvironmentOptions,
+      ...config.projectConfig.testEnvironmentOptions,
     };
   }
 
@@ -74,8 +76,10 @@ class VisualSnapshotEnvironment extends JsDomEnvironment {
       }
 
       try {
-        const cloned = this.dom.window.document.documentElement.cloneNode(true);
-        const body = cloned.getElementsByTagName("body").item(0);
+        const cloned = this.dom!.window.document.documentElement.cloneNode(
+          true
+        ) as HTMLElement;
+        const body = cloned.getElementsByTagName("body").item(0)!;
         // Wrap with a div so that we don't screenshot entire viewport
         body.innerHTML = `<div id="__vs_canvas">${html}</div>`;
         const slug = slugify(testName);

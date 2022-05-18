@@ -21,7 +21,7 @@
     "jest-environment-jsdom": "^28.1.0",
     "puppeteer": "^10.1.0"
   },
-  "gitHead": "98ebc5086c4f0c9591a959770a50ea97fd40079e",
+  "gitHead": "b79949f92a8659c63ce7271ff4e31955a1d2df92",
   "devDependencies": {
     "typescript": "^4.6"
   },

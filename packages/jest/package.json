@@ -11,7 +11,7 @@
   "homepage": "https://github.com/getsentry/jest-visual-snapshot/tree/main/packages/jest",
   "author": "Sentry",
   "license": "MIT",
-  "gitHead": "28ade6650f5cbc8e8dfe5b2b2342dd33ea67167a",
+  "gitHead": "98ebc5086c4f0c9591a959770a50ea97fd40079e",
   "dependencies": {
     "@visual-snapshot/jest-environment": "^6.0.0"
   },

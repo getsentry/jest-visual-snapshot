@@ -54,7 +54,7 @@ const createSnapshot = async ({
       await (el ? el : page).screenshot({
         path: imagePath,
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error(new Error(`${testName}: ${err}`));
       if (err.message === "Node has 0 height.") {
         console.warn("...snapshotting full page instead");
@@ -87,7 +87,7 @@ export default async function visualSnapshotGlobalTeardown() {
     await Promise.all(queue);
     await killBrowser();
     return true;
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
   }
 }
